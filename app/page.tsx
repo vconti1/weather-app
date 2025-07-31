@@ -20,7 +20,7 @@ useEffect(()=>{
   return (
     <div className = "flex flex-col items-center pt-40">
       <h1 className = "center text-6xl">Hello World!</h1>
-       <pre>{JSON.stringify(data)}</pre>
+       <pre className = "pt-50">{JSON.stringify(data)}</pre>
     </div>
   );
 }

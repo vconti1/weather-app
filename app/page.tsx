@@ -19,8 +19,8 @@ useEffect(()=>{
 
   return (
     <div className = "flex flex-col items-center pt-40">
-      <h1 className = "center text-6xl">Hello World!</h1>
-       <pre className = "pt-50">{JSON.stringify(data)}</pre>
+      <h1 className = "center text-6xl font-mono">Better Weather</h1>
+       
     </div>
   );
 }

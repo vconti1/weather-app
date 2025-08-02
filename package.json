@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.34.1",
     "@upstash/ratelimit": "^2.0.6",
     "@upstash/redis": "^1.35.3",
+    "clsx": "^2.1.1",
+    "motion": "^12.23.12",
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "redis": "^5.7.0",
-    "request-ip": "^3.3.0"
+    "request-ip": "^3.3.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

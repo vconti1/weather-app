@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from 'react';
+import { BentoGridItem } from "../components/ui/bentogrid";
 
 export default function WeatherDetailsPage() {
 
@@ -35,14 +36,20 @@ export default function WeatherDetailsPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Weather for {location}</h1>
+      <h1 className="text-3xl font-bold mb-4">Weather for {weather.location.name}</h1>
 
       {error && <p className="text-red-500">{error}</p>}
 
       {!weather && !error && <p>Loading...</p>}
 
       {weather && (
-        <div>
+        <div className = "flex flex-col">
+          <BentoGridItem className = "h-100 w-150 ">
+
+          </BentoGridItem>
+          <BentoGridItem className = "h-100 w-150 ">
+
+          </BentoGridItem>
         </div>
       )}
     </div>

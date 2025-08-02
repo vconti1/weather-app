@@ -2,7 +2,7 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis'
 import { NextRequest, NextResponse } from 'next/server';
 
-console.log("working");
+//console.log("working");
 
 // Create a new ratelimiter, that allows 10 requests per 10 seconds
  export const ratelimit = new Ratelimit({

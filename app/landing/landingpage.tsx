@@ -2,6 +2,8 @@
 
 import { fetchWeather } from "@/services/fetchWeather";
 import { useEffect, useState } from 'react';
+import { GET } from "../api/weather/route";
+import { NextResponse } from "next/server";
 
 
 export default function LandingPage() {
@@ -13,16 +15,6 @@ const handleSubmit = async (e: React.FormEvent) => {
     const res = await fetchWeather(input);
     setData(res);
 }
-
-/*
-useEffect(()=>{
-    async function getWeatherData(){
-    const res = await fetchWeather(input); // hardcoded zip
-    setData(res);
-  }
-  getWeatherData();
-},[]);
-*/
 
   return (
     <div className = "flex flex-col items-center pt-90 font-mono">
@@ -37,8 +29,6 @@ useEffect(()=>{
             className="border p-2 rounded w-full"
             />
            </form>
-            
-           
     </div>
   );
 }

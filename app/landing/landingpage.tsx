@@ -12,6 +12,7 @@ const [data, setData] = useState<any>(null);
 const [input, setInput] = useState('');
 
 const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     const res = await fetchWeather(input);
     setData(res);
 }

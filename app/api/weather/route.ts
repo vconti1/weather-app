@@ -7,7 +7,7 @@ export const GET = async (req: Request) => {
     //const result = await redis.get('foo');
 
     const { searchParams } = new URL(req.url);
-    const location = searchParams.get('query');
+    const location = searchParams.get('location');
     const key = process.env.API_KEY;
     const url = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&lang=English`;
 

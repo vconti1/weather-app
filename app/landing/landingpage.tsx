@@ -2,19 +2,20 @@
 
 import { fetchWeather } from "@/services/fetchWeather";
 import { useEffect, useState } from 'react';
-import { GET } from "../api/weather/route";
-import { NextResponse } from "next/server";
+import { useRouter } from 'next/navigation';
 
 
 export default function LandingPage() {
 
 const [data, setData] = useState<any>(null);
 const [input, setInput] = useState('');
+const router = useRouter();
 
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetchWeather(input);
     setData(res);
+    router.push(`/weather-details?location=${encodeURIComponent(input)}`);
 }
 
   return (

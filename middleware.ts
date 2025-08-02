@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Create a new ratelimiter, that allows 10 requests per 10 seconds
  export const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(3, "30 s"), // allow p1 requests per p2 seconds
+  limiter: Ratelimit.slidingWindow(10, "10 s"), // allow p1 requests per p2 seconds
 });
 
 export async function middleware(req: NextRequest){

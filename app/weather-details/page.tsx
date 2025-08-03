@@ -2,7 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from 'react';
-import { BentoGridItem } from "../components/ui/bentogrid";
+import { BentoGridItem } from "../components/ui/BentoGrid";
+
 
 export default function WeatherDetailsPage() {
 
@@ -33,23 +34,39 @@ export default function WeatherDetailsPage() {
     fetchWeather();
   }, [location]);
 
+  
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Weather for {weather.location.name}</h1>
+    <div className="p-8 items-center">
+      <h1 className="text-4xl font-mono mb-4 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
 
       {error && <p className="text-red-500">{error}</p>}
 
       {!weather && !error && <p>Loading...</p>}
 
+      {/* BENTO GRID CONTAINER */}
       {weather && (
-        <div className = "flex flex-col">
-          <BentoGridItem className = "h-100 w-150 ">
+        <div className = "flex flex-col px-25 pt-10">
 
-          </BentoGridItem>
-          <BentoGridItem className = "h-100 w-150 ">
+            <div>
+            <BentoGridItem className = "h-110 w-150"
+            //header = {weather.location.country}
+            title = {weather.location.name}
+            temp = {`${weather.current.temp_f}°`}
+            tempRange = {`H:${weather.forecast.forecastday[0].day.maxtemp_f}° L:${weather.forecast.forecastday[0].day.mintemp_f}°`}
+            condition = {`${weather.current.condition.text}`}
+            img = {`https:${weather.current.condition.icon.replace("64x64", "128x128")}`}
+            />
+            </div>
 
-          </BentoGridItem>
+            <div className = "pt-5">
+              <BentoGridItem className = "h-60 w-150"
+              
+              />
+            </div>
+
+
+
         </div>
       )}
     </div>

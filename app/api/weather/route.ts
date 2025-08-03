@@ -9,7 +9,7 @@ export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url);
     const location = searchParams.get('location');
     const key = process.env.API_KEY;
-    const url = `https://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&lang=English`;
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3&aqi=yes&alerts=yes&lang=English`;
 
     if (!location) {
     return NextResponse.json({ error: "Missing query param" }, { status: 400 });

@@ -88,7 +88,7 @@ export default function WeatherDetailsPage() {
     if(forecastOfTheDay.length === 0){
       hourInfo = weather.forecast.forecastday[day].hour[hour];
       const customHour = {
-        time: `NOW`, 
+        time: `Now`, 
         temp_f: hourInfo.temp_f,
         icon: `https:${hourInfo.condition.icon}`,
       };
@@ -125,6 +125,85 @@ export default function WeatherDetailsPage() {
   const nextTwentyFourHoursData = nextTwentyFourHours();
   //console.log(result);
 
+  function uvInfo(uv:number): {risk:string; info:string}{
+
+    if (uv <= 2) {
+      return {
+        risk: 'Low',
+        info: 'No protection needed unless sensitive skin. Sunglasses optional.'
+      };
+    }
+    if (uv > 2 && uv <= 5) {
+      return {
+        risk: 'Moderate',
+        info: 'Wear sunscreen, hat, sunglasses. Seek shade at midday.'
+      };
+    }
+    if (uv > 5 && uv <= 7) {
+      return {
+        risk: 'High',
+        info: 'Wear sunscreen, long sleeves, wide-brim hat. Reapply sunscreen every 2 hours.'
+      };
+    }
+    if (uv > 7 && uv <= 10) {
+      return {
+        risk: 'Very High',
+        info: 'SPF 50+, minimize sun exposure (10am–4pm). Stay in shade.'
+      };
+    }
+    if (uv > 10) {
+      return {
+        risk: 'Extreme',
+        info: 'Avoid sun if possible. Full protection: SPF 50+, UPF clothes, hat, sunglasses.'
+      };
+    }
+      return { risk: 'Unknown', info: 'UV data unavailable.' };
+  }
+
+  function airQualityInfo(pm10: number): { category: string; info: string } {
+  if (pm10 <= 54) {
+    return {
+      category: 'Good',
+      info: 'Air quality is considered satisfactory; air pollution poses little or no risk.'
+    };
+  }
+  if (pm10 <= 154) {
+    return {
+      category: 'Moderate',
+      info: 'Air quality is acceptable; some pollutants may be a concern for a small number of people.'
+    };
+  }
+  if (pm10 <= 254) {
+    return {
+      category: 'Unhealthy for Sensitive Groups',
+      info: 'Sensitive groups may experience health effects; the general public is unlikely to be affected.'
+    };
+  }
+  if (pm10 <= 354) {
+    return {
+      category: 'Unhealthy',
+      info: 'Everyone may begin to experience health effects; sensitive groups may experience more serious effects.'
+    };
+  }
+  if (pm10 <= 424) {
+    return {
+      category: 'Very Unhealthy',
+      info: 'Health alert: everyone may experience more serious health effects.'
+    };
+  }
+  if (pm10 > 424) {
+    return {
+      category: 'Hazardous',
+      info: 'Health warnings of emergency conditions. The entire population is more likely to be affected.'
+    };
+  }
+  return {
+    category: 'Unknown',
+    info: 'Air quality data unavailable or invalid.'
+  };
+}
+
+
   return (
     <div className="p-8 items-center">
       <h1 className="text-4xl font-mono mb-10 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
@@ -157,16 +236,25 @@ export default function WeatherDetailsPage() {
             </div>
         </div>
         <div className = "pl-5">
-        <FeelsLikeItem className = "h-56 w-56"
-        
+        <FeelsLikeItem className = "h-52 w-56"
+        title = {`Feels like`}
+        temp = {`${weather.current.feelslike_f}°`}
+        description = {weather.current.feelslike_f > weather.current.temp_f ? `It feels warmer than the actual temperature.` : `It feels cooler than the actual temperature.`}
         />
         <div className = "pt-5">
-        <UVIndexItem className = "h-49 w-56"
-        
+        <UVIndexItem className = "h-53 w-56"
+          title = {`UV Index`}
+          uv = {weather.current.uv}
+          risk = {uvInfo(weather.current.uv).risk}
+          info = {uvInfo(weather.current.uv).info}
         />
         </div>
         <div className = "pt-5">
           <AirQualityItem className = "h-60 w-56"
+          title = {`Air Quality`}
+          risk = {airQualityInfo(weather.current.air_quality.pm10).category}
+          airQuality={weather.current.air_quality.pm10}
+          info = {airQualityInfo(weather.current.air_quality.pm10).info}
           />
         </div>
         </div>

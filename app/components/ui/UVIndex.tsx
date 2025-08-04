@@ -22,33 +22,39 @@ export const BentoGrid = ({
 export const UVIndexItem = ({
   className,
   title,
-  description,
-  header,
-  icon,
+  uv,
+  info,
+  risk,
 }: {
   className?: string;
   title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
-  header?: React.ReactNode;
-  icon?: React.ReactNode;
+  uv?: string;
+  info?:string;
+  risk?: string;
+
+
 }) => {
   return (
     <div
       className={cn(
-        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-neutral-200 transition duration-200 dark:border-white/[1]",
+        "group/bento shadow-input row-span-1 flex flex-col justify-between items-center p-4 space-y-4 rounded-xl border border-neutral-200 transition duration-200 dark:border-white/[1]",
         className,
       )}
     >
-      {header}
-      <div className="transition duration-200 group-hover/bento:translate-x-2">
-        {icon}
-        <div className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
+
+         <div className="text-center font-sans text-3xl h-[20px] text-white">
           {title}
         </div>
-        <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
-          {description}
+        <div className = "flex text-white m-0">
+          <em>{risk}</em>
+        </div>
+        <div className = "flex text-white items-center justify-center h-full w-full text-4xl m-0">
+          {uv}
+        </div>
+        <div className = "text-sm text-center">
+            {info}
         </div>
       </div>
-    </div>
+
   );
 };

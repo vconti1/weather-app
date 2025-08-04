@@ -23,32 +23,30 @@ export const FeelsLikeItem = ({
   className,
   title,
   description,
-  header,
-  icon,
+  temp,
 }: {
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
-  header?: React.ReactNode;
-  icon?: React.ReactNode;
+  temp?: string;
 }) => {
   return (
     <div
       className={cn(
-        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-neutral-200 transition duration-200 dark:border-white/[1]",
+        "group/bento shadow-input p-4 row-span-1 flex flex-col items-center justify-between h-full space-y-4 rounded-xl border border-neutral-200 transition duration-200 dark:border-white/[1]",
         className,
       )}
     >
-      {header}
-      <div className="transition duration-200 group-hover/bento:translate-x-2">
-        {icon}
-        <div className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
+        <div className="absolute mt-2 mb-2 text-center font-sans text-3xl text-white">
           {title}
         </div>
-        <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
+        <div className = " flex text-white pt-13 items-center justify-center h-full w-full text-4xl">
+          {temp}
+        </div>
+        <div className = "text-white text-center">
           {description}
         </div>
-      </div>
+        
     </div>
   );
 };

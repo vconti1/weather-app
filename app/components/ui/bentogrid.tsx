@@ -35,7 +35,7 @@ export const BentoGridItem = ({
   tempRange,
 }: {
   className?: string;
-  title?: string | React.ReactNode;
+  title: string;
   data?: any;
   condition?: string | React.ReactNode;
   header?: React.ReactNode;
@@ -63,10 +63,14 @@ export const BentoGridItem = ({
       <div className = "flex flex-col w-full">
       <div className = "flex flex-row pb-10">
 
-      <div className = "flex flex-1 min-w-0 flex-col w-217 ">
-          <div className="relative min-w-0 mt-2 mb-2 font-sans font-bold text-5xl overflow-hidden whitespace-nowrap truncate">
-            {title}
-          </div>
+      <div className = "relative flex flex-1 min-w-0 flex-col w-217 ">
+          <div className="relative min-w-0 mt-2 mb-2 font-sans font-bold text-5xl h-12 overflow-hidden">
+            {/* Fade gradient on the right */}
+            <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
+             <div className="whitespace-nowrap">
+              {title}
+            </div>
+            </div>
           <div className = "font-sans text-5xl">
             {temp}
           </div>

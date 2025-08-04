@@ -1,9 +1,13 @@
 'use client';
 
+import { format } from 'date-fns';
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from 'react';
-import { BentoGridItem } from "../components/ui/BentoGrid";
-import { BentoGridDaysItem } from "../components/ui/BentoGridDays";
+import { ForecastItem } from "../components/ui/Forecast";
+import { ThreeDayForeCastItem } from "../components/ui/ThreeDayForecast";
+import { FeelsLikeItem } from "../components/ui/FeelsLike";
+import { UVIndexItem } from "../components/ui/UVIndex";
+import { AirQualityItem } from "../components/ui/AirQuality";
 
 
 export default function WeatherDetailsPage() {
@@ -35,6 +39,38 @@ export default function WeatherDetailsPage() {
     fetchWeather();
   }, [location]);
 
+  function nextThreeDays(){
+    if (!weather || !weather.forecast || !weather.forecast.forecastday) {
+      return []; 
+    }
+    let threeDays: any[] = [];
+    const daysToGet = 3;
+    let dayInfo;
+
+    for(let i = 0; i < daysToGet; i++){
+      dayInfo = weather.forecast.forecastday[i];
+
+      if(threeDays.length===0){
+        const customDay = {
+        day_name: `Today`, //EEE means short form i.e. Mon or Fri
+        temp_low: dayInfo.day.mintemp_f,
+        temp_high: dayInfo.day.maxtemp_f,
+        icon: `https:${dayInfo.day.condition.icon.replace("64x64", "128x128")}`,
+      };
+      threeDays.push(customDay);
+      }else{
+      const customDay = {
+        day_name: format(new Date(dayInfo.date), 'EEE'), //EEE means short form i.e. Mon or Fri
+        temp_low: dayInfo.day.mintemp_f,
+        temp_high: dayInfo.day.maxtemp_f,
+        icon: `https:${dayInfo.day.condition.icon.replace("64x64", "128x128")}`,
+      };
+      threeDays.push(customDay);
+      }
+    }
+    return threeDays;
+  }
+  const threeDaysData = nextThreeDays();
 
   function nextTwentyFourHours(){
 
@@ -86,12 +122,12 @@ export default function WeatherDetailsPage() {
     }
     return forecastOfTheDay;
   }
-  const result = nextTwentyFourHours();
-  console.log(result);
+  const nextTwentyFourHoursData = nextTwentyFourHours();
+  //console.log(result);
 
   return (
     <div className="p-8 items-center">
-      <h1 className="text-4xl font-mono mb-4 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
+      <h1 className="text-4xl font-mono mb-10 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
 
       {error && <p className="text-red-500">{error}</p>}
 
@@ -99,31 +135,44 @@ export default function WeatherDetailsPage() {
 
       {/* BENTO GRID CONTAINER */}
       {weather && (
-        <div className = "flex flex-col px-25 pt-10">
+        <div className = "justify-center flex flex-row">
+        <div className = "flex flex-col pl-25">
 
             <div>
-            <BentoGridItem className = "h-110 w-150"
+            <ForecastItem className = "h-110 w-150"
             //header = {weather.location.country}
             title = {weather.location.name}
             temp = {`${weather.current.temp_f}°`}
             tempRange = {`H: ${weather.forecast.forecastday[0].day.maxtemp_f}° L: ${weather.forecast.forecastday[0].day.mintemp_f}°`}
             condition = {`${weather.current.condition.text}`}
             img = {`https:${weather.current.condition.icon.replace("64x64", "128x128")}`}
-            data = {result}
+            data = {nextTwentyFourHoursData}
             />
             
             </div>
-
-
             <div className = "pt-5">
-              <BentoGridDaysItem className = "h-60 w-150"
-              
+              <ThreeDayForeCastItem className = "h-60 w-150"
+              data = {threeDaysData}
               />
             </div>
-
-
+        </div>
+        <div className = "pl-5">
+        <FeelsLikeItem className = "h-56 w-56"
+        
+        />
+        <div className = "pt-5">
+        <UVIndexItem className = "h-49 w-56"
+        
+        />
+        </div>
+        <div className = "pt-5">
+          <AirQualityItem className = "h-60 w-56"
+          />
+        </div>
+        </div>
 
         </div>
+        
       )}
     </div>
   );

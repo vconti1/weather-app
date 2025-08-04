@@ -19,7 +19,7 @@ export const BentoGrid = ({
   );
 };
 
-export const BentoGridDaysItem = ({
+export const FeelsLikeItem = ({
   className,
   title,
   description,

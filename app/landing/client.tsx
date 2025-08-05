@@ -1,12 +1,11 @@
-'use client'
+"use client";
 
 import { fetchWeather } from "@/services/fetchWeather";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 
-
-export default function LandingPage() {
+export default function LandingClient() {
 
 const [data, setData] = useState<any>(null);
 const [input, setInput] = useState('');

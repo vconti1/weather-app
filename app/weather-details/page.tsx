@@ -207,7 +207,7 @@ export default function WeatherDetailsPage() {
 
 
   return (
-    <div className="p-8 items-center">
+    <div className="p-8 items-center grid grid-cols-1">
       <h1 className="text-4xl font-mono mb-10 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
 
       {error && <p className="text-red-500">{error}</p>}
@@ -216,11 +216,11 @@ export default function WeatherDetailsPage() {
 
       {/* BENTO GRID CONTAINER */}
       {weather && (
-        <div className = "justify-center flex flex-row">
-        <div className = "flex flex-col pl-25">
+        <div className = "grid gap-5 grid-cols-1 md:grid-cols-[2fr_1fr] grid-cols-[2fr_1fr] max-w-5xl mx-auto items-stretch">
 
-            <div>
-            <ForecastItem className = "h-110 w-150"
+            <div className="flex flex-col gap-5 max-w-2xl ">
+            <ForecastItem
+            className="w-full flex-grow"
             //header = {weather.location.country}
             title = {weather.location.name}
             temp = {`${weather.current.temp_f}°`}
@@ -230,37 +230,43 @@ export default function WeatherDetailsPage() {
             data = {nextTwentyFourHoursData}
             />
             
-            </div>
-            <div className = "pt-5">
-              <ThreeDayForeCastItem className = "h-60 w-150"
+            
+            <div className = "">
+              <ThreeDayForeCastItem
+              className = "w-full"
               data = {threeDaysData}
               />
             </div>
         </div>
-        <div className = "pl-5">
-        <FeelsLikeItem className = "h-52 w-56"
+
+        <div className = "grid grid-rows-[2fr_1fr] gap-5 h-full">
+        <div className = "grid grid-row-2 h-full gap-5">
+        <FeelsLikeItem
+        className="w-full h-full"
         title = {`Feels like`}
         temp = {`${weather.current.feelslike_f}°`}
         description = {weather.current.feelslike_f > weather.current.temp_f ? `It feels warmer than the actual temperature.` : `It feels cooler than the actual temperature.`}
         />
-        <div className = "pt-5">
-        <UVIndexItem className = "h-53 w-56"
+        <div className = "flex flex-col gap-5">
+        <UVIndexItem
+          className="w-full h-full"
           title = {`UV Index`}
           uv = {weather.current.uv}
           risk = {uvInfo(weather.current.uv).risk}
           info = {uvInfo(weather.current.uv).info}
         />
         </div>
-        <div className = "pt-5">
-          <AirQualityItem className = "h-60 w-56"
+        </div>
+        
+          <AirQualityItem
+          className="w-full h-full"
           title = {`Air Quality`}
           risk = {airQualityInfo(weather.current.air_quality.pm10).category}
           airQuality={weather.current.air_quality.pm10}
           info = {airQualityInfo(weather.current.air_quality.pm10).info}
           />
-        </div>
-        </div>
 
+        </div>
         </div>
         
       )}

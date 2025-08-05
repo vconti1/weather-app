@@ -35,12 +35,11 @@ export const ThreeDayForeCastItem = ({
         className,
       )}
     >
-        <div className = "flex justify-center">
-          <div className = "">
+        <div className = "relative flex justify-center">
+          <div className = "flex flex-nowrap overflow-hidden">
+            <div className="absolute right-0 top-0 h-[260px] w-[166px] bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
             {data.map((day:any, index:number)=>(
-              <div key={index} className={`inline-block text-center w-35 mx-2 text-white ${
-                index===2 ? 'hidden md:inline-block' : ''
-              }`}>
+              <div key={index} className= 'inline-block text-center w-35 mx-2 text-white flex-nowrap'>                
                   <p className = "sm:text-sm md:text-md lg:text-lg">{day.day_name}</p>
                   <img src={day.icon} alt="weather icon" className="mx-auto" />
                   <p className = "flex-row">{day.temp_low}° — {day.temp_high}°</p>

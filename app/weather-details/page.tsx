@@ -1,13 +1,14 @@
 'use client';
 
 import { format } from 'date-fns';
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from 'react';
 import { ForecastItem } from "../components/ui/Forecast";
 import { ThreeDayForeCastItem } from "../components/ui/ThreeDayForecast";
 import { FeelsLikeItem } from "../components/ui/FeelsLike";
 import { UVIndexItem } from "../components/ui/UVIndex";
 import { AirQualityItem } from "../components/ui/AirQuality";
+import { fetchWeather } from '@/services/fetchWeather';
 
 
 export default function WeatherDetailsPage() {
@@ -17,6 +18,11 @@ export default function WeatherDetailsPage() {
 
   const [weather, setWeather] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const [data, setData] = useState<any>(null);
+  const [input, setInput] = useState('');
+  const router = useRouter();
+  
 
   useEffect(() => {
     if (!location) return;
@@ -38,6 +44,19 @@ export default function WeatherDetailsPage() {
 
     fetchWeather();
   }, [location]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      const res = await fetchWeather(input);
+      setData(res);
+      if(!res.error){
+      router.push(`/weather-details?location=${encodeURIComponent(input)}`);
+      setError(null);
+      }
+      else{
+        setError('Could not fetch weather data. Make sure the city or zip code you are entering is valid.');
+      }
+  }
 
   function nextThreeDays(){
     if (!weather || !weather.forecast || !weather.forecast.forecastday) {
@@ -208,11 +227,25 @@ export default function WeatherDetailsPage() {
 
   return (
     <div className="p-8 items-center grid grid-cols-1">
-      <h1 className="text-4xl font-mono mb-10 text-center">Better Weather</h1>  {/* Causes error when looking into api call since it hasnt processed yet on this line */}
+      <div className = "flex flex row items-center justify-center mb-10 font-mono">
+      <h1 className="text-4xl text-center flex-row px-10">Better Weather</h1>
+      <form onSubmit={handleSubmit} className = "max-w-sm flex flex-row">
+            <input
+            type = "text"
+            placeholder="Enter city or zipcode"
+            value={input}
+            onChange={((e) => setInput(e.target.value))}
+            className="border p-2 rounded w-full"
+            />
+           </form>
+           
+          </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 text-center pb-10">{error}</p>}
 
       {!weather && !error && <p className = "text-5xl text-center items-center justify-center">Loading...</p>}
+
+      
 
       {/* BENTO GRID CONTAINER */}
       {weather && (

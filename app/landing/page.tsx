@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 
+
 export default function LandingPage() {
 
 const [data, setData] = useState<any>(null);
 const [input, setInput] = useState('');
 const [error, setError] = useState('');
 const router = useRouter();
+
 
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +25,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       setError('Could not fetch weather data. Make sure the city or zip code you are entering is valid.');
     }
 }
+
+
 
   return (
     <div className = "flex flex-col items-center pt-90 font-mono">

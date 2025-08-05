@@ -49,6 +49,8 @@ export default function WeatherDetailsPage() {
 
     for(let i = 0; i < daysToGet; i++){
       dayInfo = weather.forecast.forecastday[i];
+      const [year, month, day] = dayInfo.date.split('-').map(Number);
+      const localDate = new Date(year, month - 1, day); // month is 0-indexed
 
       if(threeDays.length===0){
         const customDay = {
@@ -60,7 +62,7 @@ export default function WeatherDetailsPage() {
       threeDays.push(customDay);
       }else{
       const customDay = {
-        day_name: format(new Date(dayInfo.date), 'EEE'), //EEE means short form i.e. Mon or Fri
+        day_name: format(localDate, 'EEE'), //EEE means short form i.e. Mon or Fri
         temp_low: dayInfo.day.mintemp_f,
         temp_high: dayInfo.day.maxtemp_f,
         icon: `https:${dayInfo.day.condition.icon.replace("64x64", "128x128")}`,

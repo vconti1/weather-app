@@ -1,7 +1,7 @@
 'use client'
 
 import { fetchWeather } from "@/services/fetchWeather";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 
@@ -25,8 +25,6 @@ const handleSubmit = async (e: React.FormEvent) => {
       setError('Could not fetch weather data. Make sure the city or zip code you are entering is valid.');
     }
 }
-
-
 
   return (
     <div className = "flex flex-col items-center pt-90 font-mono">

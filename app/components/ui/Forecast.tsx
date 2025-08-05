@@ -25,13 +25,7 @@ export const ForecastItem = ({
   data,
   condition,
   img,
-  time,
-  spareImg,
-  icon,
-  imgClassName,
-  titleClassName,
   temp,
-  forecast,
   tempRange,
 }: {
   className?: string;
@@ -40,13 +34,8 @@ export const ForecastItem = ({
   condition?: string | React.ReactNode;
   header?: React.ReactNode;
   img? : string;
-  time?: string;
-  imgClassName?: string;
-  titleClassName?: string;
-  spareImg? : string;
   icon?: string;
   temp?: string
-  forecast?: string;
   tempRange?: string;
 
 }) => {
@@ -58,7 +47,6 @@ export const ForecastItem = ({
         className,
       )}
     >
-      {/* START TOP ROW */}
 
       <div className = "flex flex-col w-full">
       <div className = "flex flex-row pb-10">

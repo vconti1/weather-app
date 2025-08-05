@@ -25,18 +25,12 @@ export const AirQualityItem = ({
   airQuality,
   risk,
   info,
-  description,
-  header,
-  icon,
 }: {
   className?: string;
   title?: string | React.ReactNode;
   airQuality?: number;
   risk?: string;
   info?: string;
-  description?: string | React.ReactNode;
-  header?: React.ReactNode;
-  icon?: React.ReactNode;
 }) => {
   return (
     <div

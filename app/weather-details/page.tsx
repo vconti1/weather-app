@@ -262,9 +262,6 @@ export default function WeatherDetailsPage() {
             img = {`https:${weather.current.condition.icon.replace("64x64", "128x128")}`}
             data = {nextTwentyFourHoursData}
             />
-            
-            
-            
               <ThreeDayForeCastItem
               className = "w-full overflow-hidden flex-wrap "
               data = {threeDaysData}

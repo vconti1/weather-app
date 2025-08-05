@@ -22,11 +22,9 @@ export const BentoGrid = ({
 export const ThreeDayForeCastItem = ({
   className,
   data,
-  icon,
 }: {
   className?: string;
   data?: any;
-  icon?: React.ReactNode;
 }) => {
   return (
     <div
@@ -37,6 +35,7 @@ export const ThreeDayForeCastItem = ({
     >
         <div className = "relative flex justify-center">
           <div className = "flex flex-nowrap overflow-hidden">
+            {/* Fade gradient on the right */}
             <div className="absolute right-0 top-0 h-[260px] w-[166px] bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
             {data.map((day:any, index:number)=>(
               <div key={index} className= 'inline-block text-center w-35 mx-2 text-white flex-nowrap'>                

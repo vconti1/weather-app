@@ -1,7 +1,5 @@
 import { redis } from "@/lib/db";
 import { NextResponse } from "next/server";
-import { ratelimit } from "@/middleware"
-import { fetchWeather } from "@/services/fetchWeather";
 
 export const GET = async (req: Request) => {
     //const result = await redis.get('foo');

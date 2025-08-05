@@ -87,20 +87,27 @@ export const ForecastItem = ({
       </div>
       </div>
 
-      <div className="flex justify-center pt-5">
-        <div className="items-center h-32 w-full max-w-4xl overflow-x-auto overflow-y-hidden bg-transparent rounded-lg scroll-smooth whitespace-nowrap thin-scrollbar ">
-              {/* This is where scroll content goes */}
-              {data.map((hour:any, index:number) => (
-                 <div key={index} className="inline-block text-center w-24 mx-2 text-white">
-                  <p className = "text-sm">{hour.time}</p>
-                  <img src={hour.icon} alt="weather icon" className="mx-auto" />
-                  <p>{hour.temp_f}°</p>
-                </div>
-              ))}
+      <div className="relative w-full max-w-4xl">
 
-        </div> 
-      </div>
+      <div className="absolute left-0 top-0 h-[125px] w-10 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
+      <div className="absolute right-0 top-0 h-[125px] w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+
+              <div className="flex justify-center pt-5">
+                <div className="items-center h-32 w-full max-w-4xl overflow-x-auto overflow-y-hidden bg-transparent rounded-lg scroll-smooth whitespace-nowrap thin-scrollbar ">
+                  {/* This is where scroll content goes */}
+                  {data.map((hour:any, index:number) => (
+                    <div key={index} className="inline-block text-center w-24 mx-2 text-white">
+                      <p className = "text-sm">{hour.time}</p>
+                      <img src={hour.icon} alt="weather icon" className="mx-auto" />
+                      <p>{hour.temp_f}°</p>
+                    </div>
+                  ))}
+
+              </div> 
+            </div>
+            
+        </div>
       </div>
     </div>
   );

@@ -212,7 +212,7 @@ export default function WeatherDetailsPage() {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      {!weather && !error && <p>Loading...</p>}
+      {!weather && !error && <p className = "text-5xl text-center items-center justify-center">Loading...</p>}
 
       {/* BENTO GRID CONTAINER */}
       {weather && (

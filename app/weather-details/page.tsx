@@ -216,7 +216,7 @@ export default function WeatherDetailsPage() {
 
       {/* BENTO GRID CONTAINER */}
       {weather && (
-        <div className = "grid gap-5 grid-cols-1 md:grid-cols-[2fr_1fr] grid-cols-[2fr_1fr] max-w-5xl mx-auto items-stretch">
+        <div className = "grid gap-5 grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[2fr_1fr] max-w-5xl mx-auto items-stretch">
 
             <div className="flex flex-col gap-5 max-w-2xl ">
             <ForecastItem
@@ -231,12 +231,12 @@ export default function WeatherDetailsPage() {
             />
             
             
-            <div className = "">
+            
               <ThreeDayForeCastItem
-              className = "w-full"
+              className = "w-full overflow-hidden flex-wrap "
               data = {threeDaysData}
               />
-            </div>
+            
         </div>
 
         <div className = "grid grid-rows-[2fr_1fr] gap-5 h-full">

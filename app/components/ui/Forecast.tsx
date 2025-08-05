@@ -64,7 +64,7 @@ export const ForecastItem = ({
       <div className = "flex flex-row pb-10">
 
       <div className = "relative flex flex-1 min-w-0 flex-col w-217 ">
-          <div className="relative min-w-0 mt-2 mb-2 font-sans font-bold xl:text-5xl lg:text-5xl md:text-4xl sm:text-3xl h-12 overflow-hidden">
+          <div className="relative min-w-0 mt-2 mb-2 font-sans font-bold xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl h-12 overflow-hidden">
             {/* Fade gradient on the right */}
             <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
              <div className="whitespace-nowrap ">

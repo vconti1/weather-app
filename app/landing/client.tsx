@@ -26,9 +26,9 @@ const handleSubmit = async (e: React.FormEvent) => {
 }
 
   return (
-    <div className = "flex flex-col items-center pt-90 font-mono">
+    <div className = "flex flex-col font-mono w-screen h-screen flex justify-center items-center">
       <h1 className = "center text-center text-6xl">Better Weather</h1>
-         <h2 className = "text-2xl pt-5">Enter a zip code or city name</h2>
+         <h2 className = "text-2xl pt-5 text-center">Enter a zip code or city name</h2>
            <form onSubmit={handleSubmit} className = "pt-5 max-width max-h-11">
             <input
             type = "text"

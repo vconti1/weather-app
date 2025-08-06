@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import WeatherDetailsClient from "./page";
+import WeatherDetailsClient from "./client";
 
 export default function WeatherDetailsPage() {
   return (

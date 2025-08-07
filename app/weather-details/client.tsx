@@ -9,7 +9,7 @@ import { FeelsLikeItem } from "../components/ui/FeelsLike";
 import { UVIndexItem } from "../components/ui/UVIndex";
 import { AirQualityItem } from "../components/ui/AirQuality";
 import { fetchWeather } from '@/services/fetchWeather';
-
+import { PM10_LEVELS, UV_LEVELS } from '@/lib/data';
 
 export default function WeatherDetailsClient() {
 
@@ -22,7 +22,6 @@ export default function WeatherDetailsClient() {
   const [data, setData] = useState<any>(null);
   const [input, setInput] = useState('');
   const router = useRouter();
-  
 
   useEffect(() => {
     if (!location) return;
@@ -112,6 +111,7 @@ export default function WeatherDetailsClient() {
         time: `Now`, 
         temp_f: hourInfo.temp_f,
         icon: `https:${hourInfo.condition.icon}`,
+        chance_of_rain: hourInfo.chance_of_rain,
       };
       forecastOfTheDay.push(customHour);
     }else if(hour===24){
@@ -122,6 +122,7 @@ export default function WeatherDetailsClient() {
         time: `12AM`, //can only ever be 12AM due to conditional
         temp_f: hourInfo.temp_f,
         icon: `https:${hourInfo.condition.icon}`,
+        chance_of_rain: hourInfo.chance_of_rain,
       };
        forecastOfTheDay.push(customHour);
     }else if(hour===12){
@@ -129,6 +130,7 @@ export default function WeatherDetailsClient() {
         time: `12PM`, //can only ever be 12PM due to conditional
         temp_f: hourInfo.temp_f,
         icon: `https:${hourInfo.condition.icon}`,
+        chance_of_rain: hourInfo.chance_of_rain,
       };
        forecastOfTheDay.push(customHour);
     }else{
@@ -137,6 +139,7 @@ export default function WeatherDetailsClient() {
         time: hour > 12 ? `${(hour-12).toString()}PM` : `${hour.toString()}AM`,
         temp_f: hourInfo.temp_f,
         icon: `https:${hourInfo.condition.icon}`,
+        chance_of_rain: hourInfo.chance_of_rain,
       };
        forecastOfTheDay.push(customHour);
       }
@@ -147,81 +150,24 @@ export default function WeatherDetailsClient() {
   //console.log(result);
 
   function uvInfo(uv:number): {risk:string; info:string}{
-
-    if (uv <= 2) {
-      return {
-        risk: 'Low',
-        info: 'No protection needed unless sensitive skin. Sunglasses optional.'
-      };
-    }
-    if (uv > 2 && uv <= 5) {
-      return {
-        risk: 'Moderate',
-        info: 'Wear sunscreen, hat, sunglasses. Seek shade at midday.'
-      };
-    }
-    if (uv > 5 && uv <= 7) {
-      return {
-        risk: 'High',
-        info: 'Wear sunscreen, long sleeves, wide-brim hat. Reapply sunscreen every 2 hours.'
-      };
-    }
-    if (uv > 7 && uv <= 10) {
-      return {
-        risk: 'Very High',
-        info: 'SPF 50+, minimize sun exposure (10am–4pm). Stay in shade.'
-      };
-    }
-    if (uv > 10) {
-      return {
-        risk: 'Extreme',
-        info: 'Avoid sun if possible. Full protection: SPF 50+, UPF clothes, hat, sunglasses.'
-      };
+    const uvData =  UV_LEVELS?.find(level => uv >= level.min && uv <= level.max);
+    if(uvData){
+    return { risk: uvData.risk, info: uvData.info }; 
     }
       return { risk: 'Unknown', info: 'UV data unavailable.' };
   }
 
   function airQualityInfo(pm10: number): { category: string; info: string } {
-  if (pm10 <= 54) {
+    const airQualityData = PM10_LEVELS?.find(level => pm10 <= level.max);
+
+    if(airQualityData){
+      return {category: airQualityData.category, info: airQualityData.info};
+    }
+
     return {
-      category: 'Good',
-      info: 'Air quality is considered satisfactory; air pollution poses little or no risk.'
+      category: 'Unknown',
+      info: 'Air quality data unavailable or invalid.'
     };
-  }
-  if (pm10 <= 154) {
-    return {
-      category: 'Moderate',
-      info: 'Air quality is acceptable; some pollutants may be a concern for a small number of people.'
-    };
-  }
-  if (pm10 <= 254) {
-    return {
-      category: 'Unhealthy for Sensitive Groups',
-      info: 'Sensitive groups may experience health effects; the general public is unlikely to be affected.'
-    };
-  }
-  if (pm10 <= 354) {
-    return {
-      category: 'Unhealthy',
-      info: 'Everyone may begin to experience health effects; sensitive groups may experience more serious effects.'
-    };
-  }
-  if (pm10 <= 424) {
-    return {
-      category: 'Very Unhealthy',
-      info: 'Health alert: everyone may experience more serious health effects.'
-    };
-  }
-  if (pm10 > 424) {
-    return {
-      category: 'Hazardous',
-      info: 'Health warnings of emergency conditions. The entire population is more likely to be affected.'
-    };
-  }
-  return {
-    category: 'Unknown',
-    info: 'Air quality data unavailable or invalid.'
-  };
 }
 
 
@@ -255,7 +201,8 @@ export default function WeatherDetailsClient() {
             <ForecastItem
             className="w-full flex-grow"
             //header = {weather.location.country}
-            title = {weather.location.name}
+            region = {`${weather.location.country}, ${weather.location.region}`}
+            city = {weather.location.name}
             temp = {`${weather.current.temp_f}°`}
             tempRange = {`H: ${weather.forecast.forecastday[0].day.maxtemp_f}° L: ${weather.forecast.forecastday[0].day.mintemp_f}°`}
             condition = {`${weather.current.condition.text}`}

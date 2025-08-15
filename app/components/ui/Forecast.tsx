@@ -62,7 +62,6 @@ export const ForecastItem = ({
           <div className="relative min-w-0 mb-2 font-sans font-bold xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl h-12 overflow-hidden">
             {/* Fade gradient on the right */}
             <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none z-10" />
-      
              <div className="whitespace-nowrap ">
               {city}
             </div>
@@ -85,9 +84,9 @@ export const ForecastItem = ({
 
       <div className="relative w-full max-w-4xl">
 
-      <div className="absolute left-0 top-0 h-[125px] w-10 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 h-[160px] w-10 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
-      <div className="absolute right-0 top-0 h-[125px] w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 h-[160px] w-10 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
               <div className="flex justify-center pt-5">
                 <div className="items-center h-38 w-full max-w-4xl overflow-x-auto overflow-y-hidden bg-transparent rounded-lg scroll-smooth whitespace-nowrap thin-scrollbar ">

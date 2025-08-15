@@ -2,9 +2,9 @@
 
 A fast, minimalist weather app built with **Next.js**. It fetches current and forecast data from **WeatherAPI.com**, caches results in **Upstash Redis** for speed, and uses a **token-bucket rate limiter** (also backed by Upstash) to protect the API. Users can search by **city or ZIP code**, and the UI displays the essentials: current conditions, hourly temps, multi-day forecast, feels-like, UV index, and air quality.
 
-> **Live Demo:** [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)  
+> **Live Demo:** [https://better-weather-evgm.vercel.app/](https://better-weather-evgm.vercel.app/)  
 > **Demo screenshot**  
-> ![Better Weather](public/better-weather-preview.png)
+> ![Better Weather](public/better-weather-preview.PNG)
 
 ---
 
@@ -39,6 +39,7 @@ Next.js Route Handler
     ├─ Lookup cache by normalized query key
     │   └─ Hit → return cached JSON
     └─ Miss → call WeatherAPI.com → sanitize/shape → cache (TTL) → return
+```
 
 ---
 

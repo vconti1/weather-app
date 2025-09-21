@@ -18,8 +18,6 @@ export default function WeatherDetailsClient() {
 
   const [weather, setWeather] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-
-  const [data, setData] = useState<any>(null);
   const [input, setInput] = useState('');
   const router = useRouter();
 
@@ -46,8 +44,9 @@ export default function WeatherDetailsClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
       const res = await fetchWeather(input);
-      setData(res);
+
       if(!res.error){
       router.push(`/weather-details?location=${encodeURIComponent(input)}`);
       setError(null);

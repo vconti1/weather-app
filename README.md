@@ -1,4 +1,4 @@
-# Better Weather ☁️
+# Better Weather 
 
 A fast, minimalist weather app built with **Next.js**. It fetches current and forecast data from **WeatherAPI.com**, caches results in **Upstash Redis** for speed, and uses a **token-bucket rate limiter** (also backed by Upstash) to protect the API. Users can search by **city or ZIP code**, and the UI displays the essentials: current conditions, hourly temps, multi-day forecast, feels-like, UV index, and air quality.
 
@@ -7,18 +7,18 @@ A fast, minimalist weather app built with **Next.js**. It fetches current and fo
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🔍 Search by **city name** or **ZIP code**
-- ⚡ **Caching** via Upstash Redis to minimize API calls and speed up responses
-- 🛡️ **Rate limiting** to prevent abuse (configurable window & max requests)
-- 🧹 Server filters & formatting to return **clean, typed** weather data
-- 🌓 Polished, **dark-themed** UI (Next.js + Tailwind)
-- 📱 Responsive layout with hourly and 3-day forecast cards
+-  Search by **city name** or **ZIP code**
+-  **Caching** via Upstash Redis to minimize API calls and speed up responses
+-  **Rate limiting** to prevent abuse (configurable window & max requests)
+-  Server filters & formatting to return **clean, typed** weather data
+-  Polished, **dark-themed** UI (Next.js + Tailwind)
+-  Responsive layout with hourly and 3-day forecast cards
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 - **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS
@@ -28,21 +28,8 @@ A fast, minimalist weather app built with **Next.js**. It fetches current and fo
 
 ---
 
-## 🗺️ High-Level Flow
 
-```text
-Client (search input)
-    ↓ /api/weather?query=<city-or-zip>
-Next.js Route Handler
-    ├─ Check rate limit (Upstash Redis)
-    ├─ Lookup cache by normalized query key
-    │   └─ Hit → return cached JSON
-    └─ Miss → call WeatherAPI.com → sanitize/shape → cache (TTL) → return
-```
-
----
-
-## 🚀 Getting Started (Local Development)
+##  Getting Started (Local Development)
 
 ### 1. Clone the repository
 
@@ -74,7 +61,7 @@ Open **http://localhost:3000** in your browser.
 
 ---
 
-## 🙏 Credits
+##  Credits
 
 - [WeatherAPI.com](https://www.weatherapi.com) — Weather data  
 - [Upstash Redis](https://upstash.com) — Cache & rate limit  

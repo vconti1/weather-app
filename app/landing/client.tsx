@@ -5,9 +5,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 
-export default function LandingClient() {
+export default function Landing() {
 
-const [data, setData] = useState<any>(null);
 const [input, setInput] = useState('');
 const [error, setError] = useState('');
 const router = useRouter();
@@ -16,7 +15,6 @@ const router = useRouter();
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetchWeather(input);
-    setData(res);
     if(!res.error){
     router.push(`/weather-details?location=${encodeURIComponent(input)}`);
     }

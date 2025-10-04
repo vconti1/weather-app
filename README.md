@@ -10,7 +10,6 @@ A fast, minimalist weather app built with **Next.js**. It fetches current and fo
 ##  Features
 
 -  Search by **city name** or **ZIP code**
--  **Caching** via Upstash Redis to minimize API calls and speed up responses
 -  **Rate limiting** to prevent abuse (configurable window & max requests)
 -  Server filters & formatting to return **clean, typed** weather data
 -  Polished, **dark-themed** UI (Next.js + Tailwind)
@@ -40,8 +39,7 @@ cd better-weather
 
 ### 2. Install dependencies
 ```bash
-pnpm install
-# or: npm install
+npm install
 # or: yarn
 ```
 
@@ -55,13 +53,11 @@ UPSTASH_REDIS_REST_TOKEN=your_upstash_token
 
 ### 4. Run the development server
 ```bash
-pnpm dev
+npm run dev
 ```
 Open **http://localhost:3000** in your browser.
 
 ---
-
-##  Credits
 
 - [WeatherAPI.com](https://www.weatherapi.com) — Weather data  
 - [Upstash Redis](https://upstash.com) — Cache & rate limit  

@@ -2,8 +2,6 @@ import { redis } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export const GET = async (req: Request) => {
-    //const result = await redis.get('foo');
-
     const { searchParams } = new URL(req.url);
     const location = searchParams.get('location');
     const key = process.env.API_KEY;

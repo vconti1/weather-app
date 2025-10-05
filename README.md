@@ -11,6 +11,7 @@ A fast, minimalist weather app built with **Next.js**. It fetches current and fo
 
 -  Search by **city name** or **ZIP code**
 -  **Rate limiting** to prevent abuse (configurable window & max requests)
+-  **Server-side caching** with Upstash Redis (10-minute TTL) to speed up repeat queries and cut API calls
 -  Server filters & formatting to return **clean, typed** weather data
 -  Polished, **dark-themed** UI (Next.js + Tailwind)
 -  Responsive layout with hourly and 3-day forecast cards
@@ -44,7 +45,7 @@ npm install
 ```
 
 ### 3. Set up environment variables
-Create a `.env.local` file in the project root and add:
+Create a `.env` file in the project root and add:
 ```bash
 WEATHER_API_KEY=your_weatherapi_key
 UPSTASH_REDIS_REST_URL=your_upstash_url

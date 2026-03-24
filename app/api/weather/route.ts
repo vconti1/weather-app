@@ -11,20 +11,21 @@ export const GET = async (req: Request) => {
     return NextResponse.json({ error: "Missing query param" }, { status: 400 });
     }
 
+    // If there is a key 'location' already in redis, pull from cache instead
+    // of hitting weather API
     const cached = await redis.get(location);
-
     if (cached) {
-        return NextResponse.json(cached);
+      return NextResponse.json(cached);
     }
 
     try {
-        const res = await fetch(url);
-        const json = await res.json();
-        await redis.set(location, json, { ex: 60 * 5 } ); // cache for 5 min
-        return NextResponse.json(json);
+      const res = await fetch(url);
+      const json = await res.json();
+      await redis.set(location, json, { ex: 60 * 5 } ); // cache for 5 min
+      return NextResponse.json(json);
 
   } catch (err) {
-    console.error("Error fetching weather:", err);
+    // console.error("Error fetching weather:", err);
     return NextResponse.json({ error: "Failed to fetch weather" }, { status: 500 });
   }
     

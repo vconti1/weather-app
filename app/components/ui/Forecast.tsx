@@ -30,7 +30,7 @@ export const ForecastItem = ({
   tempRange,
   rainChance,
 }: {
-  className?: string;
+  className: string;
   city: string;
   region?: string;
   data?: any;

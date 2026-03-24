@@ -26,9 +26,9 @@ export const FeelsLikeItem = ({
   temp,
 }: {
   className?: string;
-  title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
-  temp?: string;
+  title: string | React.ReactNode;
+  description: string | React.ReactNode;
+  temp: string;
 }) => {
   return (
     <div
@@ -43,7 +43,7 @@ export const FeelsLikeItem = ({
         <div className = " flex text-white pt-13 items-center justify-center h-full w-full text-4xl">
           {temp}
         </div>
-        <div className = "text-white text-center">
+        <div className = "text-white text-center text-l">
           {description}
         </div>
         

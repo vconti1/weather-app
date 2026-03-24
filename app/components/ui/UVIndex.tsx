@@ -26,8 +26,8 @@ export const UVIndexItem = ({
   info,
   risk,
 }: {
-  className?: string;
-  title?: string | React.ReactNode;
+  className: string;
+  title: string | React.ReactNode;
   uv?: string;
   info?:string;
   risk?: string;
@@ -51,7 +51,7 @@ export const UVIndexItem = ({
         <div className = "flex text-white items-center justify-center h-full w-full text-4xl m-0">
           {uv}
         </div>
-        <div className = "text-sm text-center">
+        <div className = "text-l text-center">
             {info}
         </div>
       </div>

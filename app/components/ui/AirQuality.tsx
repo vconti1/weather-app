@@ -26,11 +26,11 @@ export const AirQualityItem = ({
   risk,
   info,
 }: {
-  className?: string;
-  title?: string | React.ReactNode;
-  airQuality?: number;
-  risk?: string;
-  info?: string;
+  className: string;
+  title: string | React.ReactNode;
+  airQuality: number;
+  risk: string;
+  info: string;
 }) => {
   return (
     <div
@@ -48,7 +48,7 @@ export const AirQualityItem = ({
         <div className = "flex text-white items-center justify-center h-full w-full text-4xl m-0">
           {airQuality}
         </div>
-        <div className = "text-sm text-center">
+        <div className = "text-l text-center">
             {info}
         </div>
     </div>

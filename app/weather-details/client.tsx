@@ -22,17 +22,17 @@ export default function WeatherDetailsClient() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!location) return;
+    if (!location) return; // exit immidietly if there is somehow no location (empty string or null)
 
     const fetchWeather = async () => {
       try {
         const res = await fetch(`/api/weather?location=${encodeURIComponent(location)}`);
+        // res is a response object containing raw text, so parse it into json
         const data = await res.json();
 
         if (!res.ok) {
           throw new Error(data.error || 'Failed to fetch');
         }
-
         setWeather(data);
       } catch (err: any) {
         setError(err.message);
@@ -219,14 +219,14 @@ export default function WeatherDetailsClient() {
         <div className = "grid grid-row-2 h-full gap-5">
         <FeelsLikeItem
         className="w-full h-full"
-        title = {`Feels like`}
+        title = {<strong>Feels like</strong>}
         temp = {`${weather.current.feelslike_f}°`}
         description = {weather.current.feelslike_f > weather.current.temp_f ? `It feels warmer than the actual temperature.` : `It feels cooler than the actual temperature.`}
         />
         <div className = "flex flex-col gap-5">
         <UVIndexItem
           className="w-full h-full"
-          title = {`UV Index`}
+          title = {<strong>UV Index</strong>}
           uv = {weather.current.uv}
           risk = {uvInfo(weather.current.uv).risk}
           info = {uvInfo(weather.current.uv).info}
@@ -236,7 +236,7 @@ export default function WeatherDetailsClient() {
         
           <AirQualityItem
           className="w-full h-full"
-          title = {`Air Quality`}
+          title = {<strong>Air Quality</strong>}
           risk = {airQualityInfo(weather.current.air_quality.pm10).category}
           airQuality={weather.current.air_quality.pm10}
           info = {airQualityInfo(weather.current.air_quality.pm10).info}
